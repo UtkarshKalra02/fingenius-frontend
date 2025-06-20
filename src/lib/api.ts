@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const fetchSummary = async () => {
   const token = localStorage.getItem("id_token");
-  const response = await axios.get("http://127.0.0.1:8000/summary", {
+  const response = await axios.get("https://finance-api-teo9.onrender.com/summary", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -12,7 +12,7 @@ export const fetchSummary = async () => {
 
 export const sendChatMessage = async (question: string): Promise<string> => {
   try {
-    const response = await axios.post("http://127.0.0.1:8000/chat", { question });
+    const response = await axios.post("https://finance-api-teo9.onrender.com/chat", { question });
     return response.data.answer || "No response received.";
   } catch (err) {
     console.error("Chat API error:", err);

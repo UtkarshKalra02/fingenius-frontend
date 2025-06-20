@@ -28,7 +28,7 @@ export default function UploadPage() {
         return;
       }
 
-      const response = await fetch("http://localhost:8000/parse", {
+      const response = await fetch("https://finance-api-teo9.onrender.com/parse", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
