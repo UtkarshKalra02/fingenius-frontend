@@ -2,11 +2,10 @@
 
 import { useAuth } from "react-oidc-context";
 import { useEffect, useRef } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const auth = useAuth();
-  const router = useRouter();
   const pathname = usePathname();
 
   const isCallbackPage = pathname === "/auth/callback";
