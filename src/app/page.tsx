@@ -10,7 +10,6 @@ import {
   Bot,
   UploadCloud
 } from "lucide-react"; // icons for nav
-import img1 from '/Users/utkarshkalra/Desktop/WebDev/finance-mentor/frontend/public/img1.jpg';
 
 interface StatCard {
   label: string;
@@ -80,7 +79,7 @@ export default function LandingPage() {
 
         <div className="md:w-1/2 flex justify-center">
           <div className="relative w-80 h-80">
-            <Image src={img1} alt="Finance Mentor" className="rounded-2xl object-cover" fill />
+            <Image src="/img1.jpg" alt="Finance Mentor" className="rounded-2xl object-cover" fill />
             <div className="absolute -top-5 -left-5 w-24 h-24 bg-blue-500 opacity-20 rounded-full" />
             <div className="absolute -bottom-5 -right-5 w-32 h-32 bg-blue-400 opacity-20 rounded-full" />
           </div>
