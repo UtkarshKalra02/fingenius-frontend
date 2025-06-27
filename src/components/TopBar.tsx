@@ -20,15 +20,16 @@ export default function TopBar() {
 
   useEffect(() => {
     if (auth?.user?.profile) {
+      const profile = auth.user.profile;
       const uname =
-        auth.user.profile.preferred_username ||
-        auth.user.profile["cognito:username"] ||
-        auth.user.profile.email || // fallback to email
+        (typeof profile.preferred_username === "string" && profile.preferred_username) ||
+        (typeof profile["cognito:username"] === "string" && profile["cognito:username"]) ||
+        (typeof profile.email === "string" && profile.email) ||
         "User";
 
       setUsername(uname);
     }
-  }, [auth?.user]); // will run once auth.user is populated
+  }, [auth?.user]);
 
   const handleLogout = async () => {
     await auth.removeUser();
