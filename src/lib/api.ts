@@ -1,12 +1,20 @@
 import axios from "axios";
 
 export const fetchSummary = async () => {
+  if (typeof window === "undefined") return {}; // prevent SSR crash
+
   const token = localStorage.getItem("id_token");
+
+  if (!token) {
+    throw new Error("Not authenticated. Please log in again.");
+  }
+
   const response = await axios.get("https://finance-api-teo9.onrender.com/summary", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
+
   return response.data;
 };
 

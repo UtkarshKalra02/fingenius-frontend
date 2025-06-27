@@ -1,41 +1,27 @@
 "use client";
 
-import { useAuth } from "react-oidc-context";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 export default function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const auth = useAuth();
   const pathname = usePathname();
-
-  const isCallbackPage = pathname === "/auth/callback";
-  const redirectingRef = useRef(false); // ✅ prevent duplicate redirects
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    if (
-      auth &&
-      !redirectingRef.current &&
-      !isCallbackPage &&
-      !auth.isLoading &&
-      !auth.isAuthenticated
-    ) {
-      redirectingRef.current = true;
-      auth.signinRedirect({ state: pathname });
+    const token = localStorage.getItem("id_token");
+
+    if (!token && pathname !== "/auth/callback") {
+      const loginUrl = `https://ap-south-1drelqz2cd.auth.ap-south-1.amazoncognito.com/login?client_id=5rckvpl3780cids2uafeljdl73&response_type=code&scope=openid+email+phone&redirect_uri=http://localhost:3000/auth/callback`;
+      window.location.href = loginUrl + `&state=${pathname}`;
+    } else {
+      setChecked(true); // ✅ Safe to show the page
     }
-  }, [auth, auth?.isLoading, auth?.isAuthenticated, pathname, isCallbackPage]);
+  }, [pathname]);
 
-  if (!auth) {
+  if (!checked) {
     return (
       <div className="flex justify-center items-center h-screen text-gray-500">
-        Loading authentication...
-      </div>
-    );
-  }
-
-  if (auth.isLoading || !auth.isAuthenticated) {
-    return (
-      <div className="flex justify-center items-center h-screen text-gray-500">
-        Loading secure content...
+        Verifying login...
       </div>
     );
   }
