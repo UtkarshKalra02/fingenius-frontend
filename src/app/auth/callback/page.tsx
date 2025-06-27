@@ -14,19 +14,18 @@ export default function CallbackPage() {
     manager.signinRedirectCallback()
       .then((user) => {
         if (user?.id_token) {
-          localStorage.setItem("id_token", user.id_token); // ✅ store token for summary
+          localStorage.setItem("id_token", user.id_token);
         }
-        if (user?.profile?.email) {
-          localStorage.setItem("email", user.profile.email); // ✅ store username (utkarsh02)
+        if (user?.profile?.["cognito:username"]) {
+          localStorage.setItem("username", user.profile["cognito:username"]);
         }
 
         const redirectPath = (user?.state as string) || "/dashboard";
 
-        // ✅ Give time for context to settle (this prevents Upload loop)
         setTimeout(() => {
           window.history.replaceState({}, document.title, redirectPath);
           router.replace(redirectPath);
-        }, 300); // 300ms wait
+        }, 300);
       })
       .catch((err) => {
         console.error("Signin callback failed:", err);

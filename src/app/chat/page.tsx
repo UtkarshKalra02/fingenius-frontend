@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Bot, SendHorizonal } from 'lucide-react';
 import { sendChatMessage } from '@/lib/api';
 import Sidebar from '@/components/Sidebar';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 type Message = { role: 'user' | 'ai'; text: string };
 
@@ -27,6 +28,7 @@ export default function ChatPage() {
   };
 
   return (
+    <ProtectedRoute>
     <div className="flex h-screen bg-gray-50">
       <Sidebar />
 
@@ -76,5 +78,6 @@ export default function ChatPage() {
         </div>
       </main>
     </div>
+    </ProtectedRoute>
   );
 }

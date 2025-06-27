@@ -8,6 +8,7 @@ import CategoryPieChart from '@/components/CategoryPieChart';
 import TransactionsTable from '@/components/TransactionTable';
 import { useEffect, useState } from 'react';
 import { fetchSummary } from '@/lib/api';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 export default function DashboardPage() {
 
@@ -22,6 +23,7 @@ export default function DashboardPage() {
     }, []);
 
   return (
+    <ProtectedRoute>
     <div className="flex min-h-screen">
       {/* Sidebar on the left */}
       <Sidebar />
@@ -49,5 +51,6 @@ export default function DashboardPage() {
         </div>
       </div>
     </div>
+    </ProtectedRoute>
   );
 }
