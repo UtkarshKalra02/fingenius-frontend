@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "react-oidc-context";
 import { LogOut } from "lucide-react";
 import {
@@ -16,18 +16,28 @@ import { Button } from "@/components/ui/button";
 export default function TopBar() {
   const auth = useAuth();
   const [open, setOpen] = useState(false);
+  const [username, setUsername] = useState("User");
+
+  useEffect(() => {
+    if (auth?.user?.profile) {
+      const uname =
+        auth.user.profile.preferred_username ||
+        auth.user.profile["cognito:username"] ||
+        auth.user.profile.email || // fallback to email
+        "User";
+
+      setUsername(uname);
+    }
+  }, [auth?.user]); // will run once auth.user is populated
 
   const handleLogout = async () => {
     await auth.removeUser();
+    localStorage.removeItem("id_token");
+    localStorage.removeItem("email");
+
     const logoutUrl = `https://ap-south-1drelqz2cd.auth.ap-south-1.amazoncognito.com/logout?client_id=5rckvpl3780cids2uafeljdl73&logout_uri=http://localhost:3000`;
     window.location.href = logoutUrl;
   };
-
-  // ✅ Extract the actual Cognito username
-  const username =
-    auth?.user?.profile?.preferred_username ||
-    auth?.user?.profile?.["cognito:username"] ||
-    "User";
 
   return (
     <header className="flex justify-between items-center px-6 py-4 shadow-sm border-b bg-white">
