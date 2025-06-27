@@ -13,17 +13,28 @@ export default function CallbackPage() {
 
     manager.signinRedirectCallback()
       .then((user) => {
-        if (user?.id_token) {
+        if (user?.id_token && typeof user.id_token === "string") {
           localStorage.setItem("id_token", user.id_token);
         }
-        if (user?.profile?.["cognito:username"]) {
+
+        if (
+          user?.profile?.["cognito:username"] &&
+          typeof user.profile["cognito:username"] === "string"
+        ) {
           localStorage.setItem("username", user.profile["cognito:username"]);
         }
 
-        const redirectPath = (user?.state as string) || "/dashboard";
+        if (
+          user?.profile?.email &&
+          typeof user.profile.email === "string"
+        ) {
+          localStorage.setItem("email", user.profile.email);
+        }
+
+        const redirectPath = typeof user?.state === "string" ? user.state : "/dashboard";
 
         setTimeout(() => {
-          window.history.replaceState({}, document.title, redirectPath);
+          window.history.replaceState(null, document.title, redirectPath);
           router.replace(redirectPath);
         }, 300);
       })
