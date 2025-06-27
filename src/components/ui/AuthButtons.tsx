@@ -19,7 +19,7 @@ export default function AuthButtons() {
   // 🔒 Logout handler
   const handleLogout = async () => {
     await oidc.removeUser(); // Clear localStorage/sessionStorage
-    const logoutUrl = `https://ap-south-1drelqz2cd.auth.ap-south-1.amazoncognito.com/logout?client_id=5rckvpl3780cids2uafeljdl73&logout_uri=http://localhost:3000`;
+    const logoutUrl = `https://ap-south-1drelqz2cd.auth.ap-south-1.amazoncognito.com/logout?client_id=5rckvpl3780cids2uafeljdl73&logout_uri=${window.location.origin}`;
     window.location.href = logoutUrl;
   };
 

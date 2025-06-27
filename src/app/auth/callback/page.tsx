@@ -2,14 +2,17 @@
 
 import { useEffect } from "react";
 import { UserManager } from "oidc-client-ts";
-import { useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 import { oidConfig } from "@/utils/oidconfig";
 
 export default function CallbackPage() {
   const router = useRouter();
 
   useEffect(() => {
-    const manager = new UserManager(oidConfig);
+    const manager = new UserManager({...oidConfig,
+      redirect_uri: `${window.location.origin}/auth/callback`,
+      post_logout_redirect_uri: `${window.location.origin}/`,
+  });
 
     manager.signinRedirectCallback()
       .then((user) => {
