@@ -36,7 +36,7 @@ export default function TopBar() {
     localStorage.removeItem("id_token");
     localStorage.removeItem("email");
 
-    const logoutUrl = `https://fingenius-frontend.auth.ap-south-1.amazoncognito.com/logout?client_id=5rckvpl3780cids2uafeljdl73&logout_uri=${encodeURIComponent(window.location.origin)}`;
+    const logoutUrl = `https://ap-south-1drelqz2cd.auth.ap-south-1.amazoncognito.com/logout?client_id=5rckvpl3780cids2uafeljdl73&logout_uri=${window.location.origin}`;
     window.location.href = logoutUrl;
   };
 
