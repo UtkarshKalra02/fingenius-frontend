@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Bot, SendHorizonal } from 'lucide-react';
 import { sendChatMessage } from '@/lib/api';
 import Sidebar from '@/components/Sidebar';
@@ -13,6 +13,7 @@ export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -28,6 +29,10 @@ export default function ChatPage() {
     setLoading(false);
   };
 
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, loading]);
+
   return (
     <ProtectedRoute>
       <div className="flex h-screen bg-gray-50">
@@ -41,20 +46,17 @@ export default function ChatPage() {
           <Bot className="w-16 h-16 text-blue-600 mb-6" />
 
           <div className="w-full max-w-2xl">
-            <div className="space-y-4 max-h-[50vh] overflow-y-auto mb-6 px-2">
+            <div className="space-y-4 max-h-[60vh] overflow-y-auto mb-6 px-2">
               {messages.map((msg, idx) => (
                 <div
                   key={idx}
-                  className={`p-3 rounded-md max-w-[75%] text-sm ${msg.role === 'user'
+                  className={`prose prose-sm whitespace-pre-wrap max-w-[75%] p-3 rounded-md ${
+                    msg.role === 'user'
                       ? 'ml-auto bg-blue-100 text-blue-900'
                       : 'mr-auto bg-gray-200 text-gray-800'
-                    }`}
+                  }`}
                 >
-                  <div className="prose prose-sm max-w-none">
-                    <ReactMarkdown>
-                      {msg.text}
-                    </ReactMarkdown>
-                  </div>
+                  <ReactMarkdown>{msg.text}</ReactMarkdown>
                 </div>
               ))}
               {loading && (
@@ -62,6 +64,7 @@ export default function ChatPage() {
                   Typing...
                 </div>
               )}
+              <div ref={messagesEndRef} />
             </div>
 
             <div className="flex items-center gap-2">
