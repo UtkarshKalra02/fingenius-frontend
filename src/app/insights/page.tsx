@@ -5,6 +5,7 @@ import Sidebar from "@/components/Sidebar";
 import TopBar from "@/components/TopBar";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 
 export default function InsightsPage() {
@@ -14,7 +15,7 @@ export default function InsightsPage() {
   useEffect(() => {
     const fetchInsights = async () => {
       try {
-        const token - localStorage.getItem("id_token");
+        const token: string | null = localStorage.getItem("id_token");
         const res = await fetch('https://finance-api-teo9.onrender.com/insights', {
           headers: {
             Authorization: `Bearer ${token}`,
