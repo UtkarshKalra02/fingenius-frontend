@@ -15,7 +15,7 @@ const menuItems = [
   { label: 'Chat', icon: MessageSquare, href: '/chat' },
   { label: 'Upload', icon: UploadCloud, href: '/upload' },
   { label: 'Insights', icon: BarChart2, href: '/insights' },
-  { label: 'Settings', icon: Settings, href: '/settings' },
+  // { label: 'Settings', icon: Settings, href: '/settings' },
 ];
 
 export default function Sidebar() {
