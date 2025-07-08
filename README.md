@@ -81,7 +81,7 @@ Make sure you have the following installed:
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/finance-mentor-frontend.git
+git clone https://github.com/UtkarshKalra02/fingenius-frontend.git
 
 # Navigate into the project folder
 cd finance-mentor-frontend
