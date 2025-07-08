@@ -38,3 +38,27 @@ The official frontend for **FinGenius**, an AI-powered personal finance mentor. 
 ---
 
 ## 📁 Folder Structure
+src/
+├── app/                        # App Router Pages
+│   ├── dashboard/             # Summary dashboard with charts
+│   ├── chat/                  # AI-powered finance chat
+│   ├── upload/                # Transaction CSV uploader
+│   ├── insights/              # Gemini-generated insights
+│   ├── settings/              # (Optional) User preferences/settings
+│   └── layout.tsx            # Shared layout wrapper
+│
+├── components/                # Reusable UI components
+│   ├── Sidebar.tsx
+│   ├── TopBar.tsx
+│   ├── SummaryCard.tsx
+│   ├── SpendingLineChart.tsx
+│   ├── CategoryPieChart.tsx
+│   └── TransactionsTable.tsx
+│
+├── lib/                       # API helper functions (e.g. fetchSummary, sendChat)
+│
+├── styles/                    # Tailwind config or global CSS
+│
+├── context/                   # (Optional) Auth or theme context
+│
+└── public/                    # Static assets like logos or icons
