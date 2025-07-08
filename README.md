@@ -62,3 +62,31 @@ src/
 ├── context/                   # (Optional) Auth or theme context
 │
 └── public/                    # Static assets like logos or icons
+
+## 🚀 Getting Started
+
+Follow these instructions to get the frontend of **FinGenius** up and running on your local machine.
+
+### ✅ Prerequisites
+
+Make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (v18+ recommended)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- A `.env.local` file with your API base URL and other environment variables
+
+---
+
+### 📦 Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/finance-mentor-frontend.git
+
+# Navigate into the project folder
+cd finance-mentor-frontend
+
+# Install dependencies
+npm install
+# or
+yarn install
