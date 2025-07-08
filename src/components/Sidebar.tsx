@@ -7,7 +7,6 @@ import {
   MessageSquare,
   UploadCloud,
   BarChart2,
-  Settings,
 } from 'lucide-react';
 
 const menuItems = [
